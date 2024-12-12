@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useAddTodoMutation} from '../Services/TodoApi';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const AddTodoScreen = ({navigation}) => {
   const [title, setTitle] = useState('');
@@ -22,6 +23,11 @@ const AddTodoScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => navigation.goBack()}>
+        <Icon name="arrow-back" size={30} color="#333" />
+      </TouchableOpacity>
       <Text style={styles.header}>Add New Todo</Text>
       <View style={styles.inputContainer}>
         <TextInput
@@ -45,6 +51,13 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#f5f5f5',
   },
+  backButton: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    zIndex: 1,
+  },
+
   header: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -65,7 +78,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   addButton: {
-    backgroundColor: '#007bff',
+    backgroundColor: 'green',
     height: 50,
     borderRadius: 8,
     justifyContent: 'center',

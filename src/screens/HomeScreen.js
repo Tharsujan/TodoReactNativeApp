@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {useGetTodosQuery, useDeleteTodoMutation} from '../Services/TodoApi';
 
@@ -75,12 +76,12 @@ const HomeScreen = ({navigation}) => {
                   onPress={() =>
                     navigation.navigate('EditTodo', {todoId: item.id})
                   }>
-                  <Text style={styles.btnText}> Edit</Text>
+                  <Icon name="edit" size={24} color="#FFFFFF" />
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.btn1}
                   onPress={() => handleDelete(item.id)}>
-                  <Text style={styles.btnText}> Delete</Text>
+                  <Icon name="delete" size={24} color="#FFFFFF" />
                 </TouchableOpacity>
               </View>
             </View>
@@ -90,7 +91,8 @@ const HomeScreen = ({navigation}) => {
       <TouchableOpacity
         style={styles.addBtn}
         onPress={() => navigation.navigate('AddTodo')}>
-        <Text>Add Todo</Text>
+        <Text style={styles.addBtnText}>Add Todo</Text>
+        <Icon name="add" size={24} style={styles.addIcon} />
       </TouchableOpacity>
     </View>
   );
@@ -138,18 +140,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   btn: {
-    width: 70,
-    height: 40,
+    width: 50,
+    height: 50,
     padding: 10,
     backgroundColor: 'blue',
     borderRadius: 10,
     alignItems: 'center',
   },
   btn1: {
-    width: 70,
-    height: 40,
+    width: 50,
+    height: 50,
     alignItems: 'center',
-    marginLeft: 10,
+    marginLeft: 20,
     backgroundColor: 'red',
     borderRadius: 10,
     padding: 10,
@@ -158,13 +160,23 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   addBtn: {
+    flexDirection: 'row',
+    paddingLeft: 30,
+    justifyContent: 'space-between',
     marginBottom: 15, // Space at the bottom
     alignSelf: 'center',
-    backgroundColor: '#E7E7E7',
+    backgroundColor: 'green',
     width: 150,
     paddingVertical: 10,
     borderRadius: 10,
     alignItems: 'center',
+  },
+  addBtnText: {
+    color: '#FFFFFF',
+  },
+  addIcon: {
+    paddingRight: 20,
+    color: '#FFFFFF',
   },
 });
 

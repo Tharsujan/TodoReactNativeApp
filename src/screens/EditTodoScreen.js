@@ -11,9 +11,17 @@ import {useGetTodoByIdQuery, useUpdateTodoMutation} from '../Services/TodoApi';
 
 const EditTodoScreen = ({route, navigation}) => {
   const {todoId} = route.params;
-  const {data: todo, isLoading} = useGetTodoByIdQuery(todoId);
+  const {data: todo, isLoading, refetch} = useGetTodoByIdQuery(todoId);
   const [updateTodo] = useUpdateTodoMutation();
   const [title, setTitle] = useState('');
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      refetch(); // Re-fetch data when the screen is focused
+    });
+
+    return unsubscribe; // Cleanup the listener
+  }, [navigation]);
 
   useEffect(() => {
     if (todo) {
