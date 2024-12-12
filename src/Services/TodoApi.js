@@ -22,7 +22,7 @@ export const todoApi = createApi({
       query: ({id, updatedTodo}) => ({
         url: `Todos/${id}`,
         method: 'PUT',
-        body: updatedTodo,
+        body: {...updatedTodo, id},
       }), // Update todo by ID
     }),
     deleteTodo: builder.mutation({
