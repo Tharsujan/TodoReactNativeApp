@@ -7,6 +7,7 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -24,8 +25,8 @@ const HomeScreen = ({navigation}) => {
   );
   if (isLoading) {
     return (
-      <View>
-        <Text>Loading...</Text>
+      <View style={styles.loaderContainer}>
+        <ActivityIndicator size="large" color="blue" />
       </View>
     );
   }
@@ -101,6 +102,12 @@ const HomeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#f5f5f5',
+  },
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#f5f5f5',
   },
   listTitleText: {

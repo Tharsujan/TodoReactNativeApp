@@ -6,8 +6,10 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import {useGetTodoByIdQuery, useUpdateTodoMutation} from '../Services/TodoApi';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const EditTodoScreen = ({route, navigation}) => {
   const {todoId} = route.params;
@@ -41,10 +43,20 @@ const EditTodoScreen = ({route, navigation}) => {
     }
   };
 
-  if (isLoading) return <Text style={styles.loadingText}>Loading...</Text>;
+  if (isLoading)
+    return (
+      <View style={styles.loaderContainer}>
+        <ActivityIndicator size="large" color="blue" />
+      </View>
+    );
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => navigation.goBack()}>
+        <Icon name="arrow-back" size={30} color="#333" />
+      </TouchableOpacity>
       <Text style={styles.headerText}>Edit Todo</Text>
 
       <TextInput
@@ -67,6 +79,18 @@ const styles = StyleSheet.create({
 
     backgroundColor: '#f4f4f9',
     padding: 20,
+  },
+  backButton: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    zIndex: 1,
+  },
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
   },
   headerText: {
     fontSize: 24,
